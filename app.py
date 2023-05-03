@@ -5,6 +5,7 @@ from sqlalchemy.orm import declarative_base, sessionmaker
 import psycopg2
 
 DB_URL = os.getenv("DB_URL")
+PASSWD = os.getenv("PASSWD")
 
 app = Flask(__name__, template_folder="templates")
 
@@ -42,7 +43,7 @@ def run():
 @app.route("/vote", methods=["POST"])
 def save_vote():
     password = request.form.get("password")
-    if password != "esc":
+    if password != PASSWD:
         return "Invalid password"
 
     name = request.form.get("name")
