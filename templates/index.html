@@ -1,0 +1,29 @@
+</head>
+<body>
+	<h1>ESC 2023 Voting System (by Steffen)</h1>
+	<h3>Bitte gebe fuer jedes Land eine Bewertung ab (1-10). Fuege jeder Bewertung ein Kommentar hinzu. Am Ende klickst du auf "Senden". Das Passwort bekommst du von Steffen am Ende des ESCs. Viel Spass!</h3>
+	<form id="vote-form" action="/vote" method="post">
+		<label for="name">Name:</label>
+		<input type="text" id="name" name="name"><br><br>
+		<label for="country1">Land 1:</label>
+		<input type="number" id="country1" name="country1" min="1" max="10"><br>
+		<label for="comment1">Kommentar:</label><br>
+		<textarea id="comment1" name="comment1" rows="4" cols="50"></textarea><br><br>
+		<label for="country2">Land 2:</label>
+		<input type="number" id="country2" name="country2" min="1" max="10"><br>
+		<label for="comment2">Kommentar:</label><br>
+		<textarea id="comment2" name="comment2" rows="4" cols="50"></textarea><br><br>
+		<label for="country3">Land 3:</label>
+		<input type="number" id="country3" name="country3" min="1" max="10"><br>
+		<label for="comment3">Kommentar:</label><br>
+		<textarea id="comment3" name="comment3" rows="4" cols="50"></textarea><br><br>
+		<label for="country4">Land 4:</label>
+		<input type="number" id="country4" name="country4" min="1" max="10"><br>
+		<label for="comment4">Kommentar:</label><br>
+		<textarea id="comment4" name="comment4" rows="4" cols="50"></textarea><br><br>
+		<label for="password">Passwort:</label>
+		<input type="text" id="password" name="password"><br><br>
+		<button type="submit">Senden</button>
+	</form>
+</body>
+</html>
