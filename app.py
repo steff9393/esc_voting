@@ -2,8 +2,9 @@ import os
 from flask import Flask, request, render_template
 from sqlalchemy import create_engine, Column, Integer, String, Text
 from sqlalchemy.orm import declarative_base, sessionmaker
-import psycopg2
+# import psycopg2
 
+# Set Env variables
 DB_URL = os.getenv("DB_URL")
 PASSWD = os.getenv("PASSWD")
 
@@ -14,6 +15,7 @@ engine = create_engine(DB_URL)
 Base = declarative_base()
 
 
+# Database Table definition
 class Vote(Base):
     __tablename__ = "votes"
 
@@ -32,14 +34,17 @@ class Vote(Base):
         return f"<Vote(name='{self.name}', country1={self.country1}, country2={self.country2}, country3={self.country3}, country4={self.country4})>"
 
 
+# Start session
 SessionLocal = sessionmaker(bind=engine)
 
 
+# Main route. Welcome Screen with formular
 @app.route("/")
 def run():
     return render_template("index.html")
 
 
+# Post Methode write votings to PostgreSQL DB
 @app.route("/vote", methods=["POST"])
 def save_vote():
     password = request.form.get("password")
@@ -74,13 +79,12 @@ def save_vote():
     session.add(new_vote)
     session.commit()
 
-    rowid = session
-
     return f"Danke, {name}. Deine Bewertung wurde übermittelt! Deine ID ist: {new_vote.id}. Bitte aufschreiben."
 
 
+# Hidden delete functionality
 @app.route("/delete/<id>", methods=["GET"])
-def del_vote(id):
+def del_vote(id: int):
     session = SessionLocal()
     obj = session.query(Vote).filter(Vote.id == id).first()
     session.delete(obj)
@@ -88,5 +92,6 @@ def del_vote(id):
     return f"{id} ist gelöscht"
 
 
+# Definition of starting
 if __name__ == "__main__":
     app.run()
