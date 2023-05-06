@@ -1,4 +1,4 @@
-from flask import request, render_template
+from flask import request
 from .models import Vote
 from .app import app
 from .database import SessionLocal
@@ -7,12 +7,6 @@ import os
 
 # Set Env variables
 PASSWD = os.getenv("PASSWD")
-
-
-# Main route. Welcome Screen with formular
-@app.route("/")
-def run():
-    return render_template("index.html")
 
 
 # Post Methode write votings to PostgreSQL DB
