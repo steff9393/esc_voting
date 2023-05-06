@@ -1,7 +1,7 @@
-import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 from flask import Flask
+from routes import *
 
 DB_URL = os.getenv("DB_URL")
 
