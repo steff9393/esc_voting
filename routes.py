@@ -1,14 +1,11 @@
-from flask import request
+from flask import request, render_template
 from models import Vote
-from app import SessionLocal
-from flask import Flask, render_template
+from app import app, SessionLocal
 import os
 
 
 # Set Env variables
 PASSWD = os.getenv("PASSWD")
-
-app = Flask('app', __name__)
 
 
 # Main route. Welcome Screen with formular
