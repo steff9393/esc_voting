@@ -1,23 +1,22 @@
-from flask import request
-from .models import Vote
-from .app import app
-from .database import SessionLocal
-from flask import render_template
 import os
+from flask import request, render_template, Blueprint
+from .models import Vote
+from .database import SessionLocal
 
+bp = Blueprint("routes", __name__, template_folder="templates")
 
 # Set Env variables
 PASSWD = os.getenv("PASSWD")
 
 
 # Main route. Welcome Screen with formular
-@app.route("/")
+@bp.route("/")
 def run():
     return render_template("index.html")
 
 
 # Post Methode write votings to PostgreSQL DB
-@app.route("/vote", methods=["POST"])
+@bp.route("/vote", methods=["POST"])
 def save_vote():
     password = request.form.get("password")
     if password != PASSWD:
@@ -55,7 +54,7 @@ def save_vote():
 
 
 # Hidden delete functionality
-@app.route("/delete/<int:id>", methods=["GET"])
+@bp.route("/delete/<int:id>", methods=["GET"])
 def del_vote(id: int):
     session = SessionLocal()
     obj = session.query(Vote).filter(Vote.id == id).first()
@@ -64,7 +63,7 @@ def del_vote(id: int):
     return f"{id} ist gelöscht"
 
 
-@app.route('/update/<int:id>', methods=['GET', 'PUT', 'POST'])
+@bp.route('/update/<int:id>', methods=['GET', 'PUT', 'POST'])
 def update_vote(id: int):
     new_country1 = request.args.get('country1')
     new_country2 = request.args.get('country2')
