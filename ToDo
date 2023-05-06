@@ -1,0 +1,5 @@
+###
+- Get Methods
+- Separate in crud.py (see chatgpt)
+- Show up result in /result/ (new route!)
+- Separate in routes.py (see chatgpt)

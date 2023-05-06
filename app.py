@@ -1,8 +1,9 @@
 import os
 from flask import Flask, request, render_template
-from sqlalchemy import create_engine, Column, Integer, String, Text
+from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
-# import psycopg2
+from models import Vote
+
 
 # Set Env variables
 DB_URL = os.getenv("DB_URL")
@@ -10,29 +11,9 @@ PASSWD = os.getenv("PASSWD")
 
 app = Flask(__name__, template_folder="templates")
 
-# Set up database connection
+# Setting up DB connection
 engine = create_engine(DB_URL)
 Base = declarative_base()
-
-
-# Database Table definition
-class Vote(Base):
-    __tablename__ = "votes"
-
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String(50))
-    country1 = Column(Text)
-    comment1 = Column(Text)
-    country2 = Column(Text)
-    comment2 = Column(Text)
-    country3 = Column(Text)
-    comment3 = Column(Text)
-    country4 = Column(Text)
-    comment4 = Column(Text)
-
-    def __repr__(self):
-        return f"<Vote(name='{self.name}', country1={self.country1}, country2={self.country2}, country3={self.country3}, country4={self.country4})>"
-
 
 # Start session
 SessionLocal = sessionmaker(bind=engine)
