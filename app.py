@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+from . import routes
 
 app = Flask(__name__, template_folder="templates")
 
