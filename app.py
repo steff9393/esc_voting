@@ -92,7 +92,7 @@ def del_vote(id: int):
     return f"{id} ist gelöscht"
 
 
-@app.route('/update/<int:id>', methods=['GET', 'POST'])
+@app.route('/update/<int:id>', methods=['PUT', 'POST'])
 def update_vote(id: int):
     new_country1 = request.args.get('country1')
     new_country2 = request.args.get('country2')
