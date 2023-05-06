@@ -113,7 +113,7 @@ def update_vote(id: int):
     session.commit()
     session.close()
 
-    return f"Update erfolgreich für {id}"
+    return f"Update erfolgreich für ID: {id}"
 
 
 # Definition of starting
