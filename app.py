@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from . import routes
+from .routes import *
 
 app = Flask(__name__, template_folder="templates")
 
