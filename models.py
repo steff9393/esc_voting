@@ -1,5 +1,6 @@
 from .app import Base
 from sqlalchemy import Column, Integer, String, Text
+from .database import Base, SessionLocal
 
 
 class Vote(Base):
