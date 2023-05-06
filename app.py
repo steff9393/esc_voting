@@ -108,7 +108,7 @@ def update_vote(id: int):
                 setattr(obj, f'country{i}', new_country)
 
     else:
-        return f"ID nicht gefunden"
+        return f"ID:{id} nicht gefunden"
 
     session.commit()
     session.close()
