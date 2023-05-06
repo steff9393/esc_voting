@@ -1,6 +1,7 @@
 from flask import request, render_template
 from .models import Vote
-from .app import app, SessionLocal
+from .app import app
+from .database import SessionLocal
 import os
 
 
