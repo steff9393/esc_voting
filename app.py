@@ -83,13 +83,37 @@ def save_vote():
 
 
 # Hidden delete functionality
-@app.route("/delete/<id>", methods=["GET"])
+@app.route("/delete/<int:id>", methods=["GET"])
 def del_vote(id: int):
     session = SessionLocal()
     obj = session.query(Vote).filter(Vote.id == id).first()
     session.delete(obj)
     session.commit()
     return f"{id} ist gelöscht"
+
+
+@app.route('/update/<int:id>', methods=['POST'])
+def update_vote(id: int):
+    new_country1 = request.args.get('country1')
+    new_country2 = request.args.get('country2')
+    new_country3 = request.args.get('country3')
+    new_country4 = request.args.get('country4')
+
+    session = SessionLocal()
+    obj = session.query(Vote).filter(Vote.id == id).first()
+
+    if obj:
+        for i, new_country in enumerate([new_country1, new_country2, new_country3, new_country4], 1):
+            if new_country is not None:
+                setattr(obj, f'country{i}', new_country)
+
+    else:
+        return f"ID nicht gefunden"
+
+    session.commit()
+    session.close()
+
+    return f"Update erfolgreich für {id}"
 
 
 # Definition of starting
